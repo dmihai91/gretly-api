@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Gretly</id>
+    <version>2.3.2</version>
+    <description>
+     Gretly is a platform dedicated to people who want to learn to develop web and mobile applications. It will target especially students who want to learn and practice the development of the applications but it will be available to anyone interested in this field. 
+    </description>
+    <authors>Darius Popescu</authors>
+    <projectUrl>https://github.com/SoftwareAteliers/asp-net-core-vue-starter</projectUrl>
+    <license type="expression">MIT</license>
+    <packageTypes>
+      <packageType name="Template" />
+    </packageTypes>
+  </metadata>
+  <files>
+    <file
+      src="**"
+      exclude="**/node_modules/**;**/bin/**;**/obj/**;**/.vs/**;**/.vscode/**;**/ClientApp/dist/**;**/wwwroot/dist/**;content/Directory.Build.*;**/.git/**"
+      target="Content" />
+  </files>
+</package>

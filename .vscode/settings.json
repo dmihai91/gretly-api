@@ -1,0 +1,6 @@
+{
+    "editor.formatOnSave": true,
+    "javascript.implicitProjectConfig.checkJs": true,
+    "javascript.implicitProjectConfig.experimentalDecorators": true,
+    "prettier.singleQuote": true
+}
