@@ -16,7 +16,7 @@ namespace Gretly.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private IUserService userService;
+        private readonly IUserService userService;
 
         public UserController(IUserService userService)
         {
@@ -76,6 +76,32 @@ namespace Gretly.Controllers
                 else
                 {
                     return StatusCode(ex.StatusCode, ex.ToString());
+                }
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ProducesResponseType(typeof(Models.User), 200)]
+        [ProducesResponseType(typeof(IReadOnlyList<QueryError>), 400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult> CreateUser(Models.User user)
+        {
+            try
+            {
+                var newUser = await userService.CreateUser(user);
+                return Ok(newUser);
+            }
+            catch (FaunaException ex)
+            {
+                if (ex.StatusCode == 400)
+                {
+                    return BadRequest(ex.Errors);
+                }
+                else
+                {
+                    return StatusCode(ex.StatusCode);
                 }
             }
         }

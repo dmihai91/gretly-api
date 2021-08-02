@@ -19,10 +19,18 @@ namespace Gretly.Models
 
         [DataMember(Name = "password")]
         [Required]
-        [StringLength(100, ErrorMessage = "{0} length must be between {2} and {1}", MinimumLength = 6)]
+        [StringLength(25, ErrorMessage = "{0} length must be between {2} and {1}", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [RegularExpression(@"^.*(?=.{6,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!*@#$%^&+=]).*$", ErrorMessage = "Weak password it should contains a minimum of 8 characters and it should contains lowercase, uppercase and special characters")]
         public string Password { get; set; }
+
+        [DataMember(Name = "confirmPassword")]
+        [Required]
+        [StringLength(25, ErrorMessage = "{0} length must be between {2} and {1}", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Compare("Password")]
+        [RegularExpression(@"^.*(?=.{6,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!*@#$%^&+=]).*$", ErrorMessage = "Weak password it should contains a minimum of 6 characters and it should contains lowercase, uppercase and special characters")]
+        public string ConfirmPassword { get; set; }
 
         [DataMember(Name = "name")]
         [Required]

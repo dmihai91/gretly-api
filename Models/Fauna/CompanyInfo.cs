@@ -9,5 +9,8 @@ namespace Gretly.Models
 
         [FaunaField("vatNumber")]
         public string VatNumber { get; set; }
+
+        [FaunaField("address")]
+        public string Address { get; set; }
     }
 }

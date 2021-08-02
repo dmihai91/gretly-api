@@ -41,9 +41,9 @@ namespace Gretly.Services
         {
             try
             {
-                var userByUsername = await this.FindUserByUsername(username);
-                var userByEmail = await this.FindUserByEmail(username);
-                return userByUsername != null ? userByUsername : (userByEmail != null ? userByEmail : null);
+                var userByUsername = await FindUserByUsername(username);
+                var userByEmail = await FindUserByEmail(username);
+                return userByUsername ?? (userByEmail ?? null);
             }
             catch (FaunaException ex)
             {
@@ -57,7 +57,7 @@ namespace Gretly.Services
             {
                 if (token.Email != null)
                 {
-                    return await this.FindUserByEmail(token.Email);
+                    return await FindUserByEmail(token.Email);
                 }
                 else
                 {

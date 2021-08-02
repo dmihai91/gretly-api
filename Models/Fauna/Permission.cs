@@ -15,7 +15,6 @@ namespace Gretly.Models
         public static readonly string USER = "user";
         public static readonly string USER_PROFILE = "user_profile";
         public static readonly string PROJECT = "project";
-        public static readonly string ADS = "ads";
     }
 
     public class Permission
@@ -32,9 +31,9 @@ namespace Gretly.Models
         [FaunaConstructor]
         public Permission(string res, string type, int value)
         {
-            this.Resource = res;
-            this.Type = type;
-            this.Value = value;
+            Resource = res;
+            Type = type;
+            Value = value;
         }
     }
 }

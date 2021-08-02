@@ -76,23 +76,23 @@ namespace Gretly.Models
         [FaunaConstructor]
         public User(string fBaseUserId, string fBUserId, string googleUserId, string email, string name, string profilePicture, int type, string phoneNumber, string country, DateTime createdAt, RefV roleRef, bool verified, bool locked, CompanyInfo companyInfo, Education education, bool businessAccount, string externalLink)
         {
-            this.FBaseUserId = fBaseUserId;
-            this.FBUserId = fBUserId;
-            this.GoogleUserId = googleUserId;
-            this.Email = email;
-            this.Name = name;
-            this.ProfilePicture = profilePicture;
-            this.Type = type;
-            this.PhoneNumber = phoneNumber;
-            this.Country = country;
-            this.CreatedAt = createdAt;
-            this.RoleRef = roleRef;
-            this.Verified = verified;
-            this.Locked = locked;
-            this.CompanyInfo = companyInfo;
-            this.Education = education;
-            this.BusinessAccount = businessAccount;
-            this.ExternalLink = externalLink;
+            FBaseUserId = fBaseUserId;
+            FBUserId = fBUserId;
+            GoogleUserId = googleUserId;
+            Email = email;
+            Name = name;
+            ProfilePicture = profilePicture;
+            Type = type;
+            PhoneNumber = phoneNumber;
+            Country = country;
+            CreatedAt = createdAt;
+            RoleRef = roleRef;
+            Verified = verified;
+            Locked = locked;
+            CompanyInfo = companyInfo;
+            Education = education;
+            BusinessAccount = businessAccount;
+            ExternalLink = externalLink;
             this.LinkRefs();
         }
 
@@ -100,23 +100,23 @@ namespace Gretly.Models
         [JsonConstructor]
         public User(string fBaseUserId, string fBUserId, string googleUserId, string email, string name, string profilePicture, int type, string phoneNumber, string country, DateTime createdAt, bool verified, bool locked, CompanyInfo companyInfo, Education education, bool businessAccount, string externalLink)
         {
-            this.FBaseUserId = fBaseUserId;
-            this.FBUserId = fBUserId;
-            this.GoogleUserId = googleUserId;
-            this.Email = email;
-            this.Name = name;
-            this.ProfilePicture = profilePicture;
-            this.Type = type;
-            this.PhoneNumber = phoneNumber;
-            this.Country = country;
-            this.CreatedAt = createdAt;
-            this.Verified = verified;
-            this.Locked = locked;
-            this.CompanyInfo = companyInfo;
-            this.Education = education;
-            this.BusinessAccount = businessAccount;
-            this.ExternalLink = externalLink;
-            this.RoleRef = this.GetQueryResult<RefV>(
+            FBaseUserId = fBaseUserId;
+            FBUserId = fBUserId;
+            GoogleUserId = googleUserId;
+            Email = email;
+            Name = name;
+            ProfilePicture = profilePicture;
+            Type = type;
+            PhoneNumber = phoneNumber;
+            Country = country;
+            CreatedAt = createdAt;
+            Verified = verified;
+            Locked = locked;
+            CompanyInfo = companyInfo;
+            Education = education;
+            BusinessAccount = businessAccount;
+            ExternalLink = externalLink;
+            RoleRef = this.GetQueryResult<RefV>(
                FaunaDbClient.GetRef(DBCollections.ROLE, ((int)Roles.SELLER).ToString())
             );
             this.LinkRefs();
@@ -125,70 +125,70 @@ namespace Gretly.Models
         // used for registering with email
         public User(string fbaseUserId, string username, string email, string name)
         {
-            this.FBaseUserId = fbaseUserId;
-            this.Username = username;
-            this.Email = email;
-            this.Name = name;
+            FBaseUserId = fbaseUserId;
+            Username = username;
+            Email = email;
+            Name = name;
             this.Init();
         }
 
         // used for registering with facebook
         public User(FBData data)
         {
-            this.Email = data.Email;
-            this.Name = data.Name;
-            this.FBUserId = data.Id;
-            this.ProfilePicture = data.Picture.Data.Url;
+            Email = data.Email;
+            Name = data.Name;
+            FBUserId = data.Id;
+            ProfilePicture = data.Picture.Data.Url;
             this.Init();
         }
 
         // used for registering with google
         public User(GoogleData data)
         {
-            this.Email = data.Email;
-            this.Name = data.Name;
-            this.GoogleUserId = data.Id;
-            this.ProfilePicture = data.Picture;
+            Email = data.Email;
+            Name = data.Name;
+            GoogleUserId = data.Id;
+            ProfilePicture = data.Picture;
             this.Init();
         }
 
         // used for updating User entity from UserDto
         public User(UserDto user)
         {
-            this.BusinessAccount = user.BusinessAccount;
-            this.CompanyInfo = user.CompanyInfo;
-            this.Country = user.Country;
-            this.CreatedAt = user.CreatedAt;
-            this.Education = user.Education;
-            this.Email = user.Email;
-            this.ExternalLink = user.ExternalLink;
-            this.FBaseUserId = user.FBaseUserId;
-            this.FBUserId = user.FBUserId;
-            this.GoogleUserId = user.GoogleUserId;
-            this.LastLoggedIn = user.LastLoggedIn;
-            this.Locked = user.Locked;
-            this.ModifiedAt = user.ModifiedAt;
-            this.Name = user.Name;
-            this.PhoneNumber = user.PhoneNumber;
-            this.ProfilePicture = user.ProfilePicture;
-            this.Role = user.Role;
-            this.RoleRef = new RefV(user.Role.Id);
-            this.Type = (int)user.Type;
-            this.Verified = user.Verified;
+            BusinessAccount = user.BusinessAccount;
+            CompanyInfo = user.CompanyInfo;
+            Country = user.Country;
+            CreatedAt = user.CreatedAt;
+            Education = user.Education;
+            Email = user.Email;
+            ExternalLink = user.ExternalLink;
+            FBaseUserId = user.FBaseUserId;
+            FBUserId = user.FBUserId;
+            GoogleUserId = user.GoogleUserId;
+            LastLoggedIn = user.LastLoggedIn;
+            Locked = user.Locked;
+            ModifiedAt = user.ModifiedAt;
+            Name = user.Name;
+            PhoneNumber = user.PhoneNumber;
+            ProfilePicture = user.ProfilePicture;
+            Role = user.Role;
+            RoleRef = new RefV(user.Role.Id);
+            Type = (int)user.Type;
+            Verified = user.Verified;
             this.LinkRefs();
         }
 
         protected override void SetDefaults()
         {
-            this.CreatedAt = System.DateTime.Now;
-            this.RoleRef = this.GetQueryResult<RefV>(
+            CreatedAt = System.DateTime.Now;
+            RoleRef = this.GetQueryResult<RefV>(
                 FaunaDbClient.GetRef(DBCollections.ROLE, ((int)Roles.SELLER).ToString())
             );
         }
 
         protected override void LinkRefs()
         {
-            this.Role = this.ConvertValueToType<Role>(
+            Role = this.ConvertValueToType<Role>(
                 this.GetQueryResult<Value>(FaunaDbClient.GetDocument(DBCollections.ROLE, this.RoleRef.Id)
             ));
         }

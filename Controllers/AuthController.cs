@@ -27,8 +27,8 @@ namespace Gretly.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private IWebHostEnvironment env;
-        private IUserService userService;
+        private readonly IWebHostEnvironment env;
+        private readonly IUserService userService;
 
         public AuthController(IWebHostEnvironment hostingEnv, IUserService userService)
         {
@@ -365,7 +365,7 @@ namespace Gretly.Controllers
                     accessToken = responseContent.AccessToken,
                     refreshToken = responseContent.RefreshToken,
                     expiresIn = responseContent.ExpiresIn,
-                    sessionId = System.Guid.NewGuid()
+                    sessionId = Guid.NewGuid()
                 });
                 return jsonResult;
             }

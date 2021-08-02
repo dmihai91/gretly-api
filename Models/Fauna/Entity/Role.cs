@@ -16,16 +16,16 @@ namespace Gretly.Models
         [JsonConstructor]
         public Role(string id, string name, Permission[] permissions)
         {
-            this.Id = id;
-            this.Name = name;
-            this.Permissions = permissions;
+            Id = id;
+            Name = name;
+            Permissions = permissions;
         }
 
         public Role(Role r)
         {
-            this.Id = r.Id;
-            this.Name = r.Name;
-            this.Permissions = r.Permissions;
+            Id = r.Id;
+            Name = r.Name;
+            Permissions = r.Permissions;
         }
     }
 }
