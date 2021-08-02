@@ -30,9 +30,6 @@ namespace Gretly.Models
         [FaunaField("profilePicture")]
         public string ProfilePicture { get; set; } = null;
 
-        [FaunaField("type")]
-        public int Type { get; set; } = (int)ProfileType.SELLER;
-
         [FaunaField("phoneNumber")]
         public string PhoneNumber { get; set; } = null;
 
@@ -52,8 +49,8 @@ namespace Gretly.Models
         [JsonIgnore]
         public RefV RoleRef;
 
-        [FaunaIgnoreAttribute]
-        public Models.Role Role { get; set; }
+        [FaunaIgnore]
+        public Role Role { get; set; }
 
         [FaunaField("verified")]
         public bool Verified { get; set; } = false;
@@ -74,7 +71,7 @@ namespace Gretly.Models
         public string ExternalLink { get; set; } = "";
 
         [FaunaConstructor]
-        public User(string fBaseUserId, string fBUserId, string googleUserId, string email, string name, string profilePicture, int type, string phoneNumber, string country, DateTime createdAt, RefV roleRef, bool verified, bool locked, CompanyInfo companyInfo, Education education, bool businessAccount, string externalLink)
+        public User(string fBaseUserId, string fBUserId, string googleUserId, string email, string name, string profilePicture, string phoneNumber, string country, DateTime createdAt, RefV roleRef, bool verified, bool locked, CompanyInfo companyInfo, Education education, bool businessAccount, string externalLink)
         {
             FBaseUserId = fBaseUserId;
             FBUserId = fBUserId;
@@ -82,7 +79,6 @@ namespace Gretly.Models
             Email = email;
             Name = name;
             ProfilePicture = profilePicture;
-            Type = type;
             PhoneNumber = phoneNumber;
             Country = country;
             CreatedAt = createdAt;
@@ -93,7 +89,7 @@ namespace Gretly.Models
             Education = education;
             BusinessAccount = businessAccount;
             ExternalLink = externalLink;
-            this.LinkRefs();
+            LinkRefs();
         }
 
         // used by json deserializer
@@ -106,7 +102,6 @@ namespace Gretly.Models
             Email = email;
             Name = name;
             ProfilePicture = profilePicture;
-            Type = type;
             PhoneNumber = phoneNumber;
             Country = country;
             CreatedAt = createdAt;
@@ -116,20 +111,19 @@ namespace Gretly.Models
             Education = education;
             BusinessAccount = businessAccount;
             ExternalLink = externalLink;
-            RoleRef = this.GetQueryResult<RefV>(
-               FaunaDbClient.GetRef(DBCollections.ROLE, ((int)Roles.SELLER).ToString())
-            );
-            this.LinkRefs();
+            LinkRefs();
         }
 
         // used for registering with email
         public User(string fbaseUserId, string username, string email, string name)
         {
             FBaseUserId = fbaseUserId;
+            FBUserId = null;
+            GoogleUserId = null;
             Username = username;
             Email = email;
             Name = name;
-            this.Init();
+            Init();
         }
 
         // used for registering with facebook
@@ -138,8 +132,10 @@ namespace Gretly.Models
             Email = data.Email;
             Name = data.Name;
             FBUserId = data.Id;
+            FBaseUserId = null;
+            GoogleUserId = null;
             ProfilePicture = data.Picture.Data.Url;
-            this.Init();
+            Init();
         }
 
         // used for registering with google
@@ -149,7 +145,7 @@ namespace Gretly.Models
             Name = data.Name;
             GoogleUserId = data.Id;
             ProfilePicture = data.Picture;
-            this.Init();
+            Init();
         }
 
         // used for updating User entity from UserDto
@@ -173,23 +169,29 @@ namespace Gretly.Models
             ProfilePicture = user.ProfilePicture;
             Role = user.Role;
             RoleRef = new RefV(user.Role.Id);
-            Type = (int)user.Type;
             Verified = user.Verified;
-            this.LinkRefs();
+            LinkRefs();
         }
 
         protected override void SetDefaults()
         {
-            CreatedAt = System.DateTime.Now;
-            RoleRef = this.GetQueryResult<RefV>(
+            CreatedAt = DateTime.Now;
+            RoleRef = GetQueryResult(
                 FaunaDbClient.GetRef(DBCollections.ROLE, ((int)Roles.SELLER).ToString())
             );
+            ModifiedAt = null;
+            PhoneNumber = "";
+            LastLoggedIn = null;
+            Country = null;
+            Locked = false;
+            Education = new Education();
+            CompanyInfo = null;
         }
 
         protected override void LinkRefs()
         {
-            Role = this.ConvertValueToType<Role>(
-                this.GetQueryResult<Value>(FaunaDbClient.GetDocument(DBCollections.ROLE, this.RoleRef.Id)
+            Role = ConvertValueToType<Role>(
+                GetQueryResult(FaunaDbClient.GetDocument(DBCollections.ROLE, RoleRef.Id)
             ));
         }
     }
