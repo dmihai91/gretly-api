@@ -1,6 +1,6 @@
 using Firebase.Auth;
 
-namespace Gretly.Utils
+namespace GretlyStudio.Utils
 {
     public class FirebaseClient
     {

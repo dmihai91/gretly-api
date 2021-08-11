@@ -1,6 +1,6 @@
 using FaunaDB.Types;
 
-namespace Gretly.Models
+namespace GretlyStudio.Models
 {
     public class Education
     {

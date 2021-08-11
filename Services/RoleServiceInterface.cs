@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Gretly.Models;
+using GretlyStudio.Models;
 
-namespace Gretly.Services
+namespace GretlyStudio.Services
 {
     public interface IRoleService
     {

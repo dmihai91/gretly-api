@@ -1,11 +1,11 @@
 ﻿using System;
 using FaunaDB.Types;
-using Gretly.Constants;
-using Gretly.Dto;
-using Gretly.Utils;
+using GretlyStudio.Constants;
+using GretlyStudio.Dto;
+using GretlyStudio.Utils;
 using Newtonsoft.Json;
 
-namespace Gretly.Models
+namespace GretlyStudio.Models
 {
     public class User : FaunaEntity
     {
@@ -70,8 +70,11 @@ namespace Gretly.Models
         [FaunaField("externalLink")]
         public string ExternalLink { get; set; } = "";
 
+        [FaunaField("isEnrolled")]
+        public bool IsEnrolled { get; set; } = false;
+
         [FaunaConstructor]
-        public User(string fBaseUserId, string fBUserId, string googleUserId, string email, string name, string profilePicture, string phoneNumber, string country, DateTime createdAt, RefV roleRef, bool verified, bool locked, CompanyInfo companyInfo, Education education, bool businessAccount, string externalLink)
+        public User(string fBaseUserId, string fBUserId, string googleUserId, string email, string name, string profilePicture, string phoneNumber, string country, DateTime createdAt, RefV roleRef, bool verified, bool locked, CompanyInfo companyInfo, Education education, bool businessAccount, string externalLink, bool isEnrolled)
         {
             FBaseUserId = fBaseUserId;
             FBUserId = fBUserId;
@@ -89,12 +92,13 @@ namespace Gretly.Models
             Education = education;
             BusinessAccount = businessAccount;
             ExternalLink = externalLink;
+            IsEnrolled = isEnrolled;
             LinkRefs();
         }
 
         // used by json deserializer
         [JsonConstructor]
-        public User(string fBaseUserId, string fBUserId, string googleUserId, string email, string name, string profilePicture, int type, string phoneNumber, string country, DateTime createdAt, bool verified, bool locked, CompanyInfo companyInfo, Education education, bool businessAccount, string externalLink)
+        public User(string fBaseUserId, string fBUserId, string googleUserId, string email, string name, string profilePicture, string phoneNumber, string country, DateTime createdAt, bool verified, bool locked, CompanyInfo companyInfo, Education education, bool businessAccount, string externalLink, bool isEnrolled)
         {
             FBaseUserId = fBaseUserId;
             FBUserId = fBUserId;
@@ -111,6 +115,7 @@ namespace Gretly.Models
             Education = education;
             BusinessAccount = businessAccount;
             ExternalLink = externalLink;
+            IsEnrolled = isEnrolled;
             LinkRefs();
         }
 
@@ -170,6 +175,7 @@ namespace Gretly.Models
             Role = user.Role;
             RoleRef = new RefV(user.Role.Id);
             Verified = user.Verified;
+            IsEnrolled = user.IsEnrolled;
             LinkRefs();
         }
 
@@ -177,7 +183,7 @@ namespace Gretly.Models
         {
             CreatedAt = DateTime.Now;
             RoleRef = GetQueryResult(
-                FaunaDbClient.GetRef(DBCollections.ROLE, ((int)Roles.SELLER).ToString())
+                FaunaDbClient.GetRef(DBCollections.ROLE, ((int)Roles.USER).ToString())
             );
             ModifiedAt = null;
             PhoneNumber = "";
@@ -186,6 +192,7 @@ namespace Gretly.Models
             Locked = false;
             Education = new Education();
             CompanyInfo = null;
+            IsEnrolled = false;
         }
 
         protected override void LinkRefs()

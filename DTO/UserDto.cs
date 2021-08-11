@@ -1,10 +1,10 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
-using Gretly.Constants;
-using Gretly.Models;
+using GretlyStudio.Constants;
+using GretlyStudio.Models;
 
-namespace Gretly.Dto
+namespace GretlyStudio.Dto
 {
     [DataContract]
     public class UserDto
@@ -33,9 +33,6 @@ namespace Gretly.Dto
 
         [DataMember(Name = "profilePicture")]
         public string ProfilePicture { get; set; }
-
-        [DataMember(Name = "type")]
-        public ProfileType Type { get; set; }
 
         [DataMember(Name = "phoneNumber")]
         [Phone]
@@ -70,9 +67,12 @@ namespace Gretly.Dto
         public Education Education { get; set; }
 
         [DataMember(Name = "businessAccount")]
-        public Boolean BusinessAccount { get; set; }
+        public bool BusinessAccount { get; set; } = false;
 
         [DataMember(Name = "externalLink")]
-        public String ExternalLink { get; set; }
+        public string ExternalLink { get; set; }
+
+        [DataMember(Name = "isEnrolled")]
+        public bool IsEnrolled { get; set; } = false;
     }
 }

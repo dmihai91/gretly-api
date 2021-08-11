@@ -1,6 +1,6 @@
 
 using System.IdentityModel.Tokens.Jwt;
-using Gretly.Dto;
+using GretlyStudio.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using FireSharp.Extensions;
 
-namespace Gretly.Utils
+namespace GretlyStudio.Utils
 {
     public class Helpers
     {

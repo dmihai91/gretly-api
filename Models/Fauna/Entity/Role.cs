@@ -2,7 +2,7 @@ using System;
 using FaunaDB.Types;
 using Newtonsoft.Json;
 
-namespace Gretly.Models
+namespace GretlyStudio.Models
 {
     public class Role : FaunaEntity
     {

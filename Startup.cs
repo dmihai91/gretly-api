@@ -8,15 +8,17 @@ using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Gretly.Utils;
+using GretlyStudio.Utils;
 using Microsoft.Extensions.Logging;
 using NSwag;
 using System.Linq;
 using NSwag.Generation.Processors.Security;
-using Gretly.Services;
+using GretlyStudio.Services;
 using Microsoft.AspNetCore.Routing;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
-namespace Gretly
+namespace GretlyStudio
 {
     public class Startup
     {
@@ -68,7 +70,7 @@ namespace Gretly
                 config.PostProcess = document =>
                 {
                     document.Info.Version = "v1";
-                    document.Info.Title = "Gretly API";
+                    document.Info.Title = "GretlyStudio API";
                 };
                 config.OperationProcessors.Add(new OperationSecurityScopeProcessor("JWT Token"));
                 config.AddSecurity("JWT Token", Enumerable.Empty<string>(),
@@ -79,6 +81,7 @@ namespace Gretly
                         In = OpenApiSecurityApiKeyLocation.Header,
                         Description = "Copy this into the value field: Bearer {token}"
                     }
+
                 );
             });
         }

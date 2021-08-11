@@ -1,4 +1,4 @@
-namespace Gretly.Constants
+namespace GretlyStudio.Constants
 {
     public class DBCollections
     {

@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FaunaDB.Types;
-using Gretly.Models;
+using GretlyStudio.Models;
 using Newtonsoft.Json;
 
 using static FaunaDB.Query.Language;
 
-namespace Gretly.Utils
+namespace GretlyStudio.Utils
 {
     public class DBHelpers
     {

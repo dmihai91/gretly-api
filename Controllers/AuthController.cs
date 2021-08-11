@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using Gretly.Utils;
-using Gretly.Models;
-using Gretly.Dto;
+using GretlyStudio.Utils;
+using GretlyStudio.Models;
+using GretlyStudio.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Firebase.Auth;
 using Microsoft.AspNetCore.Http;
@@ -15,13 +15,13 @@ using Newtonsoft.Json;
 using Serilog;
 using Microsoft.AspNetCore.Authorization;
 using FaunaDB.Errors;
-using Gretly.Constants;
+using GretlyStudio.Constants;
 
-using Gretly.Services;
+using GretlyStudio.Services;
 using System.Reflection;
 using System.ComponentModel;
 
-namespace Gretly.Controllers
+namespace GretlyStudio.Controllers
 {
     [Route("[controller]")]
     [ApiController]
@@ -62,7 +62,7 @@ namespace Gretly.Controllers
             }
             try
             {
-                var user = await this.userService.FindUser(loginInfo.Username);
+                var user = await userService.FindUser(loginInfo.Username);
                 if (user != null)
                 {
                     try

@@ -4,7 +4,7 @@ using FaunaDB.Types;
 
 using static FaunaDB.Query.Language;
 
-namespace Gretly.Utils
+namespace GretlyStudio.Utils
 {
     public class FaunaDbClient
     {

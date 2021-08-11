@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
-namespace Gretly.Models
+namespace GretlyStudio.Models
 {
     public class RegistrationInfo
     {

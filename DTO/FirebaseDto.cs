@@ -3,7 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
-namespace Gretly.Dto
+namespace GretlyStudio.Dto
 {
     [DataContract]
     public class FirebaseDto

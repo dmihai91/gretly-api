@@ -1,16 +1,16 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Gretly.Utils;
+using GretlyStudio.Utils;
 using Firebase.Auth;
 using Microsoft.AspNetCore.Authorization;
-using Gretly.Dto;
+using GretlyStudio.Dto;
 using FaunaDB.Errors;
-using Gretly.Constants;
-using Gretly.Services;
+using GretlyStudio.Constants;
+using GretlyStudio.Services;
 using System.Collections.Generic;
-using Gretly.Models;
+using GretlyStudio.Models;
 
-namespace Gretly.Controllers
+namespace GretlyStudio.Controllers
 {
     [Route("[controller]")]
     [ApiController]

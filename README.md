@@ -4,7 +4,7 @@ The repository contains an ASP.&#8203;NET Core + Vue.js starter template. The te
 
 Original article how to create the starter template is available [here](https://medium.com/software-ateliers/asp-net-core-vue-template-with-custom-configuration-using-cli-3-0-8288e18ae80b).
 
-[![Nuget](https://img.shields.io/nuget/v/SoftwareAteliers.Gretly.svg?style=flat&color=2196f3)](https://www.nuget.org/packages/SoftwareAteliers.Gretly/)
+[![Nuget](https://img.shields.io/nuget/v/SoftwareAteliers.GretlyStudio.svg?style=flat&color=2196f3)](https://www.nuget.org/packages/SoftwareAteliers.GretlyStudio/)
 
 > For ASP.NET Core 2.2 template use [release v1.1.0](https://github.com/SoftwareAteliers/asp-net-core-vue-starter/releases/tag/1.1.0)
 
@@ -62,7 +62,7 @@ There are two ways how to set up the project: one for people who want to create 
 
 or you can use .NET Core CLI templates:
 
-- Install the template from NuGet repository: `dotnet new -i SoftwareAteliers.Gretly`
+- Install the template from NuGet repository: `dotnet new -i SoftwareAteliers.GretlyStudio`
 
 - Initialize the project: `dotnet new vue -o MyProject`
 

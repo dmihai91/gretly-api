@@ -5,7 +5,7 @@ using FaunaDB.Types;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Gretly.Models
+namespace GretlyStudio.Models
 {
     // abstract class for FaundDB models
     public class FaunaEntity

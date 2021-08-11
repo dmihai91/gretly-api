@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Gretly.Models
+namespace GretlyStudio.Models
 {
     public class FBPicture
     {

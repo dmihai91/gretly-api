@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Gretly.Dto;
-using Gretly.Models;
+using GretlyStudio.Dto;
+using GretlyStudio.Models;
 
-namespace Gretly.Services
+namespace GretlyStudio.Services
 {
     public interface IUserService
     {

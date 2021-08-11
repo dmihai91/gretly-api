@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Gretly.Models
+namespace GretlyStudio.Models
 {
     public class ApiSuccessResponse
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace Gretly.Utils
+namespace GretlyStudio.Utils
 {
     public class PasswordGenerator
     {

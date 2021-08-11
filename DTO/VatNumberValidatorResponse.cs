@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Gretly.Dto
+namespace GretlyStudio.Dto
 {
     [DataContract]
     public class VatNumberValidatorResponse

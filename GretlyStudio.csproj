@@ -7,11 +7,11 @@
     <IsPackable>false</IsPackable>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
     <Authors>Darius Popescu</Authors>
-    <Company>Gretly.inc</Company>
-    <Description>Gretly web platform</Description>
-    <Copyright>MIT 2020 </Copyright>
-    <AssemblyName>Gretly</AssemblyName>
-    <RootNamespace>Gretly</RootNamespace>
+    <Company>GretlyStudio.inc</Company>
+    <Description>GretlyStudio web platform</Description>
+    <Copyright>MIT 2021</Copyright>
+    <AssemblyName>GretlyStudio</AssemblyName>
+    <RootNamespace>GretlyStudio</RootNamespace>
     <Version>2.3.2</Version>
     <AssemblyVersion>2.3.2.0</AssemblyVersion>
     <FileVersion>2.3.2.0</FileVersion>

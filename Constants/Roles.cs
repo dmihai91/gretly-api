@@ -1,9 +1,8 @@
-namespace Gretly.Constants
+namespace GretlyStudio.Constants
 {
     public enum Roles
     {
-        SELLER = 1,
-        BUYER = 2,
-        ADMIN = 3
+        USER = 1,
+        ADMIN = 2
     }
 }

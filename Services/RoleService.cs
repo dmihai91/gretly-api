@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FaunaDB.Errors;
-using Gretly.Constants;
-using Gretly.Models;
-using Gretly.Utils;
+using GretlyStudio.Constants;
+using GretlyStudio.Models;
+using GretlyStudio.Utils;
 
-namespace Gretly.Services
+namespace GretlyStudio.Services
 {
     public class RoleService : IRoleService
     {
