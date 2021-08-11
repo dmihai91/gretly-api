@@ -47,8 +47,8 @@ namespace GretlyStudio.Models
 
         protected void Init()
         {
-            this.SetDefaults();
-            this.LinkRefs();
+            SetDefaults();
+            LinkRefs();
         }
 
         // should be override by the derived class

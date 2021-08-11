@@ -74,5 +74,8 @@ namespace GretlyStudio.Dto
 
         [DataMember(Name = "isEnrolled")]
         public bool IsEnrolled { get; set; } = false;
+
+        [DataMember(Name = "accountType")]
+        public int AccountType { get; set; }
     }
 }

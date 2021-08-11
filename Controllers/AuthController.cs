@@ -111,7 +111,7 @@ namespace GretlyStudio.Controllers
         [ProducesResponseType(typeof(ApiError), 400)]
         [ProducesResponseType(500)]
 
-        public async Task<ActionResult> RegisterUser([FromBody] RegistrationInfo registrationInfo)
+        public async Task<ActionResult> Register([FromBody] RegistrationInfo registrationInfo)
         {
             try
             {
