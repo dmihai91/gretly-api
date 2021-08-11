@@ -15,7 +15,7 @@ namespace GretlyStudio.Utils
     {
         public static FirebaseDto DecodeToken(string authHeader)
         {
-            var jwt = authHeader.Substring("Bearer ".Length).Trim();
+            var jwt = authHeader["Bearer ".Length..].Trim();
             var handler = new JwtSecurityTokenHandler();
             var token = (FirebaseDto)handler.ReadJwtToken(jwt);
             return token;
@@ -26,11 +26,14 @@ namespace GretlyStudio.Utils
             return Request.Headers["Authorization"].ToString();
         }
 
-        public static Object GenerateRefreshToken(Firebase.Auth.FirebaseAuthLink firebaseResponse, IWebHostEnvironment env)
+        public static object GenerateRefreshToken(Firebase.Auth.FirebaseAuthLink firebaseResponse, IWebHostEnvironment env)
         {
-            var cookieOptions = new CookieOptions();
-            cookieOptions.HttpOnly = true;
-            cookieOptions.Expires = DateTime.Now.AddMonths(1);
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = DateTime.Now.AddMonths(1)
+            };
+
             if (!env.IsDevelopment())
             {
                 cookieOptions.Secure = true;
@@ -40,12 +43,12 @@ namespace GretlyStudio.Utils
             {
                 accessToken = firebaseResponse.FirebaseToken,
                 expiresIn = firebaseResponse.ExpiresIn,
-                sessionId = System.Guid.NewGuid()
+                sessionId = Guid.NewGuid()
             });
             return new
             {
-                jsonResult = jsonResult,
-                cookieOptions = cookieOptions
+                jsonResult,
+                cookieOptions
             };
         }
 

@@ -20,6 +20,7 @@ using GretlyStudio.Constants;
 using GretlyStudio.Services;
 using System.Reflection;
 using System.ComponentModel;
+using Microsoft.Extensions.Configuration;
 
 namespace GretlyStudio.Controllers
 {
@@ -29,11 +30,13 @@ namespace GretlyStudio.Controllers
     {
         private readonly IWebHostEnvironment env;
         private readonly IUserService userService;
+        private readonly IConfiguration config;
 
-        public AuthController(IWebHostEnvironment hostingEnv, IUserService userService)
+        public AuthController(IWebHostEnvironment hostingEnv, IUserService userService, IConfiguration config)
         {
             env = hostingEnv;
             this.userService = userService;
+            this.config = config; 
         }
 
         private async Task<OkObjectResult> AuthOkResponse(FirebaseAuthLink firebaseResponse, Models.User user)
@@ -46,7 +49,7 @@ namespace GretlyStudio.Controllers
             JsonResult jsonResult = (JsonResult)jsonResultProp.GetValue(data);
             Response.Cookies.Append("refresh_token", firebaseResponse.RefreshToken, cookieOptions);
             // set lastLoggedIn field to Now
-            await userService.UpdateUser<System.DateTime>(user.Id, new KeyValuePair<string, DateTime>("LastLoggedIn", System.DateTime.Now));
+            await userService.UpdateUser(user.Id, new KeyValuePair<string, DateTime>("LastLoggedIn", DateTime.Now));
             return Ok(jsonResult.Value);
         }
 
@@ -116,7 +119,7 @@ namespace GretlyStudio.Controllers
                 try
                 {
                     var newUser = await userService.CreateUser(new Models.User(response.User.LocalId, registrationInfo.Username, registrationInfo.Email, registrationInfo.Name));
-                    return Ok(Helpers.FormatData<Models.User>(newUser));
+                    return Ok(Helpers.FormatData(newUser));
                 }
                 catch (FaunaException ex)
                 {
@@ -296,7 +299,7 @@ namespace GretlyStudio.Controllers
                 try
                 {
                     var user = await userService.FindUserByToken(token);
-                    return Ok(Helpers.FormatData<Models.User>(user));
+                    return Ok(Helpers.FormatData(user));
                 }
                 catch (FaunaException ex)
                 {
@@ -329,7 +332,7 @@ namespace GretlyStudio.Controllers
                 return Unauthorized(new ApiError(ErrorReasons.NO_REFRESH_TOKEN, "No refresh token provided"));
             }
 
-            var uri = new Uri("https://securetoken.googleapis.com/v1/token?key=" + FirebaseClient.GetApiKey());
+            var uri = new Uri(config["OAuthRefreshTokenServerUrl"] + FirebaseClient.GetApiKey());
 
             var request = new HttpRequestMessage(HttpMethod.Post, uri);
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
@@ -352,9 +355,11 @@ namespace GretlyStudio.Controllers
             else
             {
                 var responseContent = JsonConvert.DeserializeObject<RefreshTokenResponse>(result);
-                var cookieOptions = new CookieOptions();
+                var cookieOptions = new CookieOptions
+                {
+                    HttpOnly = true
+                };
 
-                cookieOptions.HttpOnly = true;
                 if (!env.IsDevelopment())
                 {
                     cookieOptions.Secure = true;
@@ -379,10 +384,10 @@ namespace GretlyStudio.Controllers
         {
             HttpClient client = new HttpClient();
             Response.Cookies.Delete("refresh_token");
-            var uri = new Uri("https://us-central1-project-zero-a37a9.cloudfunctions.net/api/revokeTokens");
+            var uri = new Uri(config["OAuthRevokeTokenServerUrl"]);
             var request = new HttpRequestMessage(HttpMethod.Post, uri);
             var authHeader = Request.Headers["Authorization"].ToString();
-            var jwt = authHeader.Substring("Bearer ".Length).Trim();
+            var jwt = authHeader["Bearer ".Length..].Trim();
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", jwt);
             try
             {
