@@ -1,4 +1,3 @@
-using System;
 using FaunaDB.Types;
 using Newtonsoft.Json;
 

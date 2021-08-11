@@ -1,5 +1,3 @@
-using FaunaDB.Types;
-
 namespace GretlyStudio.Models
 {
     public class CompanyInfo

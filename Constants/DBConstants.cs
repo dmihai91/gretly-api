@@ -5,6 +5,9 @@ namespace GretlyStudio.Constants
         public static readonly string USER = "User";
         public static readonly string PROJECT = "Project";
         public static readonly string ROLE = "Role";
+        public static readonly string COURSE = "Course";
+        public static readonly string QUIZ = "Quiz";
+        public static readonly string TEMPLATE = "Template";
     }
 
     public class DBIndexes
